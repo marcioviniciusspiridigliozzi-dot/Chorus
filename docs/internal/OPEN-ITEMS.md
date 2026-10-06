@@ -40,6 +40,14 @@ Released 2026-10-05 as 1.5.27: build 40, tag `4ab767f`, DMG 10,520,614 bytes, sh
 - Not tried: Figma, Notion, Miro and Drive opening files; the tab strip on macOS 14 and 15 (CI compiles and tests only); ⌘⇧[ and ⌘⇧] on a non-US keyboard.
 - Tabs add no automated test for the branch order in `createWebViewWith`, for `closeTabOrWindow`, or for the tab and popup opener interplay.
 
+## Open: three contributor PRs sent back for changes (#35, #36, #37)
+
+Reviewed on 2026-10-05. Each has a "request changes" review on GitHub listing what to fix. Re-review against that list when the author pushes, and approve the CI run on #35 and #37, which have not run it yet.
+
+- **#37, Gmail actions survive hide and switch (jpagh).** Merges cleanly onto 1.5.27. The fix runs on every switch, reload and quit for every service. On the branch the tab strip covers the top 32pt of the page, Reload waits about 2s, and quit takes about 3s longer. Element fullscreen may also break, which nobody has checked. Asked to hold the old page only when the pointer is over it, and to put the Safari 27 user agent in its own commit, since it goes to every service.
+- **#35, mailto links through Chorus (jpagh).** Based eight releases back; conflicts only in `project.pbxproj`. Blocking: mail links clicked inside a service no longer reach the system mail app, a page can claim mail links with no prompt, and a hidden Chrome-UA probe loads every service. The schema stage checks out field by field. Suggested opening compose as a service tab rather than a separate window.
+- **#36, rebuild a page that keeps growing.** Conflicts only in `CHANGELOG.md`. The ten-minute guard reads `lastAccessTimes`, which only records activation. A rebuild also closes open tabs, skips the `quitReleaseJS` save, and reloads the home URL. Asked for a log-only release first, which would also test the plateau finding under the memory item below. The author's point stands: read `webcontent_mb` one process at a time, because the sum hides a single page that climbs.
+
 ## Open: sign-in groups (services sharing cookies), explored, not built
 
 Asked on 2026-10-05 and parked for its own session. No code exists yet. The exploration found:
