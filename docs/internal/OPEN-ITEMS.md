@@ -565,7 +565,9 @@ Verified: 182 tests. Two run the catalog expression through JavaScriptCore again
 
 **A note on how to verify this class of bug live.** A fresh Gmail load reads the right number under *both* the old and the new expression, so a screenshot after launch proves nothing. Only the round trip separates them: visit another label, come back, then read the badge.
 
-## Open: Slack notifications arrive late — leading cause fixed in 1.5.18, not yet confirmed
+## Closed: Slack notifications arrive late (issue #24)
+
+Closed on 2026-10-05 as not planned. Nobody added to #24 in the six weeks after it opened, and nine releases have shipped since the 1.5.18 fix. If it comes back, reopen #24 and start from the notes below.
 
 Reported 2026-07-31. The most likely cause was found in the 2026-08-06 review and fixed: a service with no live web view posts no banners at all, because the banner path is the `chorusNotification` handler and only the active space was ever preloaded. "A workspace I was not in" fits that exactly. Chat services in every space are preloaded now, capped at five.
 
